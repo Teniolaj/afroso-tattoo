@@ -1,0 +1,252 @@
+Here's a prompt you can paste into Replit's AI agent:
+
+---
+
+**Build a React + Vite project for a tattoo studio website called "Afroso Tattoo" owned by Nii Afroso, based in Accra, Ghana.**
+
+---
+
+### PROJECT SETUP
+```
+afroso-tattoo/
+├── index.html
+├── vite.config.js
+├── package.json
+├── src/
+│   ├── main.jsx
+│   ├── App.jsx
+│   ├── index.css          ← global styles, CSS variables, fonts, resets
+│   ├── components/
+│   │   ├── Cursor.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Hero.jsx
+│   │   ├── About.jsx
+│   │   ├── Services.jsx
+│   │   ├── Gallery.jsx
+│   │   ├── Process.jsx
+│   │   ├── Testimonials.jsx
+│   │   ├── Booking.jsx
+│   │   └── Footer.jsx
+│   └── pages/
+│       ├── Home.jsx        ← composes all sections
+│       └── GalleryPage.jsx ← placeholder, to be built later
+```
+
+**Dependencies:** `react`, `react-dom`, `react-router-dom`, `vite`, `@vitejs/plugin-react`. No Tailwind, no UI libraries, no CSS-in-JS. All styles go in component-level `.css` files imported into each component.
+
+**Routing:** Use `react-router-dom` with `BrowserRouter`. Two routes:
+- `/` → `Home.jsx` (all sections)
+- `/gallery` → `GalleryPage.jsx` (placeholder page for now)
+
+---
+
+### DESIGN SYSTEM — `src/index.css`
+```css
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --black: #080808;
+  --off-black: #111111;
+  --dark: #1c1c1c;
+  --grey: #555555;
+  --silver: #888888;
+  --light: #aaaaaa;
+  --off-white: #d8d8d8;
+  --white: #f2f2f2;
+  --pure: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'EB Garamond', serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+```
+
+Also add a global grain texture overlay in `index.css` using `body::after` with an SVG `fractalNoise` filter, `position: fixed`, `inset: 0`, `pointer-events: none`, `z-index: 8999`, `opacity: 0.5`.
+
+---
+
+### COMPONENT SPECS
+
+---
+
+#### `Cursor.jsx`
+- Two `div`s: `.cursor` (10px white dot, `mix-blend-mode: difference`) and `.cursor-ring` (34px white border circle)
+- Both `position: fixed`, `border-radius: 50%`, `pointer-events: none`, `z-index: 9999/9998`, `transform: translate(-50%, -50%)`
+- In `useEffect`, track `mousemove` for the dot, use `requestAnimationFrame` with lerp (`rx += (mx - rx) * 0.12`) for the ring
+- On `mouseenter` of `a, button, input, select, textarea`: dot shrinks to 6px, ring expands to 52px. Reverse on `mouseleave`.
+- Mount once in `App.jsx` outside the router outlet so it persists across pages
+
+---
+
+#### `Navbar.jsx`
+- `position: fixed`, full width, `z-index: 1000`, `display: flex`, space-between, `padding: 1.6rem 5rem`
+- **At top of page:** `background: transparent`, `border-bottom: transparent` — blends with hero
+- **On scroll (`scrollY > 60`):** transitions to `background: rgba(8,8,8,0.96)`, `backdrop-filter: blur(16px)`, subtle white bottom border
+- Use `useState` + `useEffect` with `window.addEventListener('scroll', ...)` to toggle a `.scrolled` class
+- Left: Logo — `"Nii"` in white + `"Afroso"` in silver, `Cinzel Decorative`, links to `/`
+- Centre: Nav links using `react-router-dom` `<Link>` — Studio (`/#about`), Services (`/#services`), Gallery (`/gallery`), Process (`/#process`) — `Cinzel`, `0.22em` letter-spacing, uppercase, `color: var(--off-white)`, hover underline sweep via `::after` pseudo-element
+- Right: "Book a Session" pill button (`border-radius: 100px`), white bg, black text, links to `/#booking`
+
+---
+
+#### `Hero.jsx`
+- Full viewport height (`height: 100vh`), `position: relative`, `overflow: hidden`, `display: flex`, `flex-direction: column`, `justify-content: flex-end`
+- **Mosaic background:** `position: absolute`, `inset: 0`, CSS grid `grid-template-columns: 1fr 1.4fr 1fr`, `grid-template-rows: 1fr 1fr`, `gap: 3px`. Five dark gradient panels — centre panel spans both rows (`grid-row: 1/3`). Each panel contains a faint (`opacity: 0.12–0.15`) white SVG line illustration: concentric circles top-left, tattoo machine silhouette centre, geometric triangle top-right, flowing curves bottom panels.
+- **Overlay:** `position: absolute`, `inset: 0`, `z-index: 2`, gradient `linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.08) 35%, rgba(8,8,8,0.6) 70%, rgba(8,8,8,0.93) 100%)`
+- **Text block:** `position: relative`, `z-index: 3`, `padding: 0 5rem 5rem`, centred column:
+  - Eyebrow: `"Accra, Ghana · Est. 2015"` — `Cinzel`, tiny, silver, `letter-spacing: 0.5em`
+  - H1: `"Nii Afroso"` in `Cinzel Decorative`, `clamp(3.8rem, 10vw, 9.5rem)`, white
+  - Span below H1: `"Tattoo Studio"` — `clamp(1.8rem, 4.5vw, 4rem)`, `letter-spacing: 0.14em`
+  - Thin 60px white horizontal rule
+  - Italic description: `"Where every scar becomes a story and every story becomes art."`
+  - Two pill buttons: primary (white bg, black text) → `/gallery` | ghost (white border) → `/#booking`
+- All text elements use `animation: fadeUp` with staggered `animation-delay` (0.3s, 0.5s, 0.7s, 0.85s, 1s)
+- Scroll indicator at bottom-centre: "SCROLL" label + animated dripping vertical line (`@keyframes drip`)
+
+---
+
+#### `About.jsx`
+- Background: `var(--off-black)`, `position: relative`, `overflow: hidden`
+- Ghost watermark: `::before` pseudo with `content: 'NII'`, huge font, `opacity: 0.012`, positioned right
+- Inner: `display: grid`, `grid-template-columns: 1fr 1fr`, `gap: 6rem`, `max-width: 1100px`, `margin: 0 auto`
+- Left (image placeholder): `aspect-ratio: 3/4` dark box with diagonal stripe pattern (`repeating-linear-gradient`) + SVG silhouette inside. Offset frame border: `position: absolute`, `top: -14px`, `left: -14px`, `right: 14px`, `bottom: 14px`, `border: 1px solid rgba(255,255,255,0.1)`
+- Right: section label, H2 `"Art Carved Into Skin"`, two body paragraphs with `<em>` highlights, then stats row (10+ Years · 800+ Pieces · 4 Artists) separated by a top border
+- Use a custom `useReveal` hook (IntersectionObserver) — left panel gets `reveal-l` class, right gets `reveal-r`
+
+---
+
+#### `Services.jsx`
+- Background: `var(--black)`, centred header
+- `3×2` grid (`repeat(3, 1fr)`), `gap: 1px`, background `rgba(255,255,255,0.06)` (creates visible dividers)
+- Each `.svc` card: `background: var(--black)`, `padding: 3rem 2rem`, `position: relative`, `overflow: hidden`
+- Card hover: background shifts to `var(--off-black)`, a white `1px` bottom line sweeps from `right: 100%` to `right: 0` via CSS transition on `::after`
+- Inside each card: ghosted large number (01–06) top-right, SVG icon, service name in `Cinzel`, grey description
+- Services data array (map over it):
+  ```js
+  [
+    { num:'01', name:'Custom Designs', desc:'...' },
+    { num:'02', name:'Fine Line & Minimalist', desc:'...' },
+    { num:'03', name:'Blackwork & Tribal', desc:'...' },
+    { num:'04', name:'Realism & Portraits', desc:'...' },
+    { num:'05', name:'Cover-Ups', desc:'...' },
+    { num:'06', name:'Aftercare & Touch-Ups', desc:'...' },
+  ]
+  ```
+- On scroll reveal, stagger cards with `transitionDelay: index * 0.09 + 's'`
+
+---
+
+#### `Gallery.jsx` *(home section — teaser only)*
+- Off-black background, centred header
+- Asymmetric `12-column × 3-row` CSS grid, `max-width: 1200px`, rows each `190px`, gap `3px`:
+  - `g1`: col 1–5, rows 1–3 | `g2`: col 5–9, row 1 | `g3`: col 9–13, rows 1–3
+  - `g4`: col 5–7, row 2 | `g5`: col 7–9, row 2
+  - `g6`: col 1–5, row 3 | `g7`: col 5–9, row 3 | `g8`: col 9–13, row 3
+- **Fly-in animation:** Each tile has a starting `transform: translate(X,Y) rotate(Zdeg)` and `opacity: 0`. When gallery enters viewport (IntersectionObserver), add `.gi-in` class → `opacity: 1`, `transform: none`, `filter: blur(0)`. Stagger via inline `transition-delay`.
+  - Directions: g1 top-left, g2 top, g3 top-right, g4 bottom-left, g5 bottom-right, g6 far-bottom-left, g7 bottom, g8 far-bottom-right
+- Each tile has a dark overlay (`rgba(8,8,8,0.45)`) that fades on hover, white SVG art inside, tag label appears on hover
+- "View Full Gallery" pill button below the grid → links to `/gallery`
+
+---
+
+#### `GalleryPage.jsx`
+- Standalone page at route `/gallery`
+- Includes `<Navbar />` at the top
+- Currently a styled placeholder: full-page dark background, centred text `"Gallery — Coming Soon"` in `Cinzel Decorative`, with a back link `←` to `/`
+- This page will be fully built later — just scaffold it cleanly
+
+---
+
+#### `Process.jsx`
+- Black background, centred header
+- Flex row of 4 steps, `max-width: 1100px`
+- Horizontal connector line: `position: absolute`, `top: 27px`, `left: 10%`, `right: 10%`, `height: 1px`, `background: rgba(255,255,255,0.1)`
+- Each step: 54px circle (`border: 1px solid rgba(255,255,255,0.2)`, `border-radius: 50%`), Roman numeral inside (`Cinzel Decorative`), step name, description below. On hover: circle fills white, text turns black
+- Steps data: `[{ num: 'I', name: 'Consultation' }, { num: 'II', name: 'Design' }, { num: 'III', name: 'The Session' }, { num: 'IV', name: 'Aftercare' }]`
+
+---
+
+#### `Testimonials.jsx`
+- Off-black background, centred header
+- **Infinite marquee slider:**
+  - Outer wrapper: `overflow: hidden`, `max-width: 1100px`, `position: relative`
+  - Left/right fade edges via `::before`/`::after` with `linear-gradient` from `var(--off-black)` to transparent
+  - Inner track: `display: flex`, `width: max-content`, `gap: 1.2rem`, `animation: marquee 28s linear infinite`
+  - `@keyframes marquee`: `translateX(0)` → `translateX(-50%)`
+  - On hover: `animation-play-state: paused`
+  - 6 review cards duplicated to 12 total for seamless loop — render the array twice inside the track
+  - Each card: `flex: 0 0 320px`, `border-radius: 6px`, small quote mark, italic review text, reviewer name + detail
+- Reviews data array of 6 objects with `text`, `name`, `detail` fields
+
+---
+
+#### `Booking.jsx`
+- Black background with a centred radial glow (`rgba(255,255,255,0.025)`)
+- `max-width: 700px`, centred, `text-align: center`
+- Section label + H2 `"Book a Session"` + italic subtext
+- Decorative rule: flex row with `::before`/`::after` lines and `✦` in centre
+- `2-column` form grid: First Name, Last Name, Email, Phone, Style (select dropdown), Placement — then full-width textarea
+- All inputs: `border-radius: 8px`, `background: rgba(255,255,255,0.03)`, `border: 1px solid rgba(255,255,255,0.1)`, focus brightens border
+- Submit: full-width pill button, white bg, black text, `"Request Consultation ✦"`
+- Use `useState` for controlled form fields, `onSubmit` logs to console for now
+
+---
+
+#### `Footer.jsx`
+- Off-black background, `border-top: 1px solid rgba(255,255,255,0.06)`, `padding: 4rem 5rem`
+- `3-column` grid: brand+tagline | Navigate links | Find Us (address details)
+- Navigate links use `react-router-dom` `<Link>` where applicable
+- Bottom bar: `© 2025 Afroso Tattoo Studio · Accra` left | `Crafted with intention ✦` right
+
+---
+
+### CUSTOM HOOK — `useReveal.js`
+Create `src/hooks/useReveal.js`:
+```js
+import { useEffect, useRef } from 'react';
+
+export function useReveal(threshold = 0.1) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible'); },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return ref;
+}
+```
+
+Global `.reveal`, `.reveal-l`, `.reveal-r` classes in `index.css`:
+```css
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-l { opacity: 0; transform: translateX(-36px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal-l.visible { opacity: 1; transform: translateX(0); }
+.reveal-r { opacity: 0; transform: translateX(36px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal-r.visible { opacity: 1; transform: translateX(0); }
+```
+
+---
+
+### ALL BUTTONS MUST BE PILL-SHAPED
+Every `<button>` and `<a>` styled as a button must have `border-radius: 100px`. No sharp corners anywhere.
+
+### DO NOT
+- Use Tailwind
+- Use any CSS-in-JS library
+- Use `create-react-app`
+- Use any component library (MUI, shadcn, etc.)
+- Put styles in `App.css` — each component gets its own `.css` file
+
+---

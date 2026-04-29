@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --black: #080808;
+  --off-black: #111111;
+  --dark: #1c1c1c;
+  --grey: #555555;
+  --silver: #888888;
+  --light: #aaaaaa;
+  --off-white: #d8d8d8;
+  --white: #f2f2f2;
+  --pure: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--off-white);
+  font-family: 'EB Garamond', serif;
+  overflow-x: hidden;
+  cursor: none; /* Custom cursor */
+}
+
+/* Global grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8999;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Buttons */
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  padding: 12px 28px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.pill-button.primary {
+  background-color: var(--pure);
+  color: var(--black);
+}
+
+.pill-button.primary:hover {
+  background-color: var(--off-white);
+  transform: translateY(-2px);
+}
+
+.pill-button.ghost {
+  background-color: transparent;
+  color: var(--pure);
+  border: 1px solid var(--grey);
+}
+
+.pill-button.ghost:hover {
+  border-color: var(--pure);
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Reveal Animations */
+.reveal, .reveal-l, .reveal-r {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal {
+  transform: translateY(40px);
+}
+
+.reveal-l {
+  transform: translateX(-40px);
+}
+
+.reveal-r {
+  transform: translateX(40px);
+}
+
+.reveal.visible, .reveal-l.visible, .reveal-r.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Base Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  color: var(--pure);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: none;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 120px 0;
+}
+
+/* Typography utilities */
+.text-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.text-decorative {
+  font-family: 'Cinzel Decorative', serif;
+}
+
+/* Forms */
+input, textarea, select {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+}

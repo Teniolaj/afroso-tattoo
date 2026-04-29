@@ -1,0 +1,144 @@
+.about {
+  background-color: var(--off-black);
+  position: relative;
+  overflow: hidden;
+}
+
+.about::before {
+  content: 'NII';
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  transform: translateY(-50%);
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 40vw;
+  color: rgba(255, 255, 255, 0.02);
+  z-index: 0;
+  pointer-events: none;
+  line-height: 0.8;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.about-image-wrapper {
+  position: relative;
+  padding: 40px;
+}
+
+.image-frame {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: var(--black);
+  border: 1px solid var(--dark);
+  overflow: hidden;
+}
+
+.image-frame::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border: 1px solid var(--grey);
+  z-index: -1;
+}
+
+.diagonal-pattern {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
+}
+
+.artist-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: auto;
+  opacity: 0.8;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--silver);
+  display: block;
+  margin-bottom: 24px;
+}
+
+.about-text h2 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 40px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.about-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--light);
+}
+
+.about-content em {
+  color: var(--pure);
+  font-style: italic;
+}
+
+.about-stats {
+  display: flex;
+  gap: 48px;
+  border-top: 1px solid var(--dark);
+  padding-top: 32px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5rem;
+  color: var(--pure);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--silver);
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .about-text h2 {
+    font-size: 3rem;
+  }
+}

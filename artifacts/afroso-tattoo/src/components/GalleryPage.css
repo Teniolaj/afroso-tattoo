@@ -1,0 +1,45 @@
+.gallery-page {
+  min-height: 100vh;
+  background-color: var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.gallery-page-content h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-align: center;
+  color: var(--pure);
+  letter-spacing: 0.05em;
+}
+
+.back-link {
+  position: absolute;
+  top: 120px;
+  left: 40px;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  color: var(--silver);
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--pure);
+}
+
+@media (max-width: 600px) {
+  .back-link {
+    top: 100px;
+    left: 20px;
+  }
+}
