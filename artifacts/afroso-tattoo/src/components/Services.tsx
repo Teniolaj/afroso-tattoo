@@ -5,38 +5,38 @@ import './Services.css';
 const SERVICES = [
   {
     id: '01',
-    name: 'Custom Designs',
-    desc: 'Bespoke artwork tailored to your story and vision.',
+    name: 'Realistic Tattoos',
+    desc: 'Detailed, lifelike tattoo work with careful shading, contrast, and depth.',
     icon: <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" strokeWidth="2" />
   },
   {
     id: '02',
-    name: 'Fine Line & Minimalist',
-    desc: 'Delicate, precise linework for elegant and subtle pieces.',
+    name: 'Bold & Fine Lines',
+    desc: 'Clean linework ranging from delicate fine details to strong graphic marks.',
     icon: <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" />
   },
   {
     id: '03',
-    name: 'Blackwork & Tribal',
-    desc: 'Bold, heavy black ink inspired by traditional patterns.',
+    name: 'Old Skull',
+    desc: 'Classic tattoo attitude with bold shapes, strong outlines, and timeless character.',
     icon: <path d="M20 20 L80 80 M80 20 L20 80" stroke="currentColor" strokeWidth="2" />
   },
   {
     id: '04',
-    name: 'Realism & Portraits',
-    desc: 'Lifelike imagery capturing every minute detail.',
+    name: 'Picture & 3D Works',
+    desc: 'Photo-inspired and dimensional pieces built to feel vivid on the skin.',
     icon: <path d="M30 50 Q50 20 70 50 Q50 80 30 50" fill="none" stroke="currentColor" strokeWidth="2" />
   },
   {
     id: '05',
-    name: 'Cover-Ups',
-    desc: 'Transforming old ink into breathtaking new art.',
+    name: 'Color Realism',
+    desc: 'Rich color tattoos with realistic texture, tone, and lasting visual impact.',
     icon: <path d="M20 50 Q50 20 80 50 T20 50" fill="none" stroke="currentColor" strokeWidth="2" />
   },
   {
     id: '06',
-    name: 'Aftercare & Touch-Ups',
-    desc: 'Ensuring your piece heals perfectly and stands the test of time.',
+    name: 'Custom Tattoo Work',
+    desc: 'Original concepts refined with the client from first idea to finished piece.',
     icon: <path d="M50 20 v60 M20 50 h60" stroke="currentColor" strokeWidth="2" />
   }
 ];

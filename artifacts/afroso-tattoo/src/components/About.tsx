@@ -1,5 +1,6 @@
 import React from 'react';
 import { useReveal } from '../hooks/useReveal';
+import studioImage from '../assets/about-us.png';
 import './About.css';
 
 export default function About() {
@@ -11,11 +12,7 @@ export default function About() {
       <div className="container about-grid">
         <div className="about-image-wrapper reveal-l" ref={imgRef}>
           <div className="image-frame">
-            <div className="diagonal-pattern" />
-            <svg viewBox="0 0 200 200" className="artist-silhouette">
-              <path d="M100 20 C60 20 60 70 60 70 C60 100 80 120 100 120 C120 120 140 100 140 70 C140 70 140 20 100 20 Z" fill="var(--dark)" />
-              <path d="M40 200 C40 150 70 130 100 130 C130 130 160 150 160 200" fill="var(--dark)" />
-            </svg>
+            <img src={studioImage} alt="Nii Afroso tattoo studio session" className="studio-photo" />
           </div>
         </div>
         

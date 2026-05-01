@@ -65,6 +65,10 @@
   gap: 24px;
 }
 
+.hidden-field {
+  display: none;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -90,6 +94,31 @@ input, select, textarea {
   transition: border-color 0.3s ease;
   outline: none;
   border-radius: 0;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active,
+select:focus,
+select:active {
+  background: transparent;
+  color: var(--pure);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--pure);
+  caret-color: var(--pure);
+  box-shadow: 0 0 0 1000px var(--black) inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 input::placeholder, textarea::placeholder {
@@ -124,6 +153,27 @@ select option {
   margin-top: 32px;
   align-self: center;
   padding: 16px 40px;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+.form-status {
+  max-width: 520px;
+  margin: -4px auto 0;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.form-status.success {
+  color: var(--pure);
+}
+
+.form-status.error {
+  color: #ff9f9f;
 }
 
 @media (max-width: 600px) {

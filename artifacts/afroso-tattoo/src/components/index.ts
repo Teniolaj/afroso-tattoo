@@ -9,3 +9,4 @@ export { default as Testimonials } from './Testimonials';
 export { default as Booking } from './Booking';
 export { default as Footer } from './Footer';
 export { default as Cursor } from './Cursor';
+export { default as WhatsAppFloat } from './WhatsAppFloat';

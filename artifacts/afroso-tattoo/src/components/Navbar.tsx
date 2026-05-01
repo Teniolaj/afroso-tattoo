@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
+import logoMark from '../assets/afroso-logo.jpg';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -18,6 +19,7 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link href="/" className="logo">
+          <img src={logoMark} alt="" className="logo-mark" aria-hidden="true" />
           <span className="logo-first">Nii</span>
           <span className="logo-last">Afroso</span>
         </Link>
@@ -25,7 +27,7 @@ export default function Navbar() {
         <div className="nav-links">
           <a href="/#about">Studio</a>
           <a href="/#services">Services</a>
-          <Link href="/gallery">Gallery</Link>
+          {location !== '/gallery' && <Link href="/gallery">Gallery</Link>}
           <a href="/#process">Process</a>
         </div>
         

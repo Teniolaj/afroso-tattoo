@@ -15,7 +15,8 @@ import {
   Testimonials,
   Booking,
   Footer,
-  Cursor
+  Cursor,
+  WhatsAppFloat
 } from "./components";
 
 const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
+        <WhatsAppFloat />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

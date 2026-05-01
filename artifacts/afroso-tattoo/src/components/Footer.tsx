@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         
         <div className="footer-bottom">
-          <div className="copyright">© 2025 Afroso Tattoo Studio · Accra</div>
+          <div className="copyright">© 2026 Afroso Tattoo Studio · Accra</div>
           <div className="credits">Crafted with intention ✦</div>
         </div>
       </div>

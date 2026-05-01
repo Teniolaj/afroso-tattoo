@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useReveal } from '../hooks/useReveal';
+import galleryLandscape from '../assets/gallery/gallery-image-landscape.jpg';
+import galleryPortrait from '../assets/gallery/gallery-image-potrait.jpg';
+import galleryPortrait2 from '../assets/gallery/gallery-image-potrait2.jpg';
+import gallerySquare from '../assets/gallery/gallery-image-square1.jpg';
+import galleryPortrait3 from '../assets/gallery/gallery-imiage-potrait3.jpg';
+import galleryPortrait4 from '../assets/gallery/gallery-image-potrait4.png';
 import './Gallery.css';
 
 const TILES = [
-  { id: 'g1', className: 'tile-g1', label: 'Fine Line', delay: 0.1 },
-  { id: 'g2', className: 'tile-g2', label: 'Realism', delay: 0.3 },
-  { id: 'g3', className: 'tile-g3', label: 'Blackwork', delay: 0.2 },
-  { id: 'g4', className: 'tile-g4', label: 'Tribal', delay: 0.4 },
-  { id: 'g5', className: 'tile-g5', label: 'Cover-Up', delay: 0.2 },
-  { id: 'g6', className: 'tile-g6', label: 'Custom', delay: 0.5 },
-  { id: 'g7', className: 'tile-g7', label: 'Minimalist', delay: 0.3 },
-  { id: 'g8', className: 'tile-g8', label: 'Portrait', delay: 0.4 },
+  { id: 'g1', className: 'tile-g1 portrait', label: 'Portrait Work', src: galleryPortrait, delay: 0.1 },
+  { id: 'g2', className: 'tile-g2 landscape', label: 'Back Piece', src: galleryLandscape, delay: 0.2 },
+  { id: 'g3', className: 'tile-g3 portrait', label: 'Fine Line', src: galleryPortrait2, delay: 0.3 },
+  { id: 'g4', className: 'tile-g4 portrait', label: '3D Detail', src: galleryPortrait3, delay: 0.35 },
+  { id: 'g5', className: 'tile-g5 square', label: 'Realism', src: gallerySquare, delay: 0.18 },
+  { id: 'g6', className: 'tile-g6 portrait', label: 'Line Study', src: galleryPortrait4, delay: 0.42 },
 ];
 
 export default function Gallery() {
@@ -36,10 +40,7 @@ export default function Gallery() {
                 style={{ transitionDelay: `${tile.delay}s` }}
               >
                 <div className="tile-overlay" />
-                <svg viewBox="0 0 100 100" className="tile-art">
-                  <path d="M10 50 Q50 10 90 50 Q50 90 10 50" fill="none" stroke="currentColor" strokeWidth="1" />
-                  <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1" />
-                </svg>
+                <img src={tile.src} alt={`${tile.label} tattoo artwork`} className="tile-image" loading="lazy" />
                 <span className="tile-label">{tile.label}</span>
               </div>
             );
