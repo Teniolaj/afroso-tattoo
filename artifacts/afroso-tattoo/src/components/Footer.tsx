@@ -27,7 +27,7 @@ export default function Footer() {
             <address>
               Osu, Accra<br />
               Ghana<br /><br />
-              +233 55 123 4567<br />
+              +233 50 324 2339<br />
               bookings@afroso.tattoo
             </address>
           </div>
