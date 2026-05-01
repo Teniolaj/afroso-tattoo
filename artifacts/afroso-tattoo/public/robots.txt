@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://afroso-tattoo.vercel.app/sitemap.xml
