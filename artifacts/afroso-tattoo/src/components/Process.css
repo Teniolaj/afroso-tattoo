@@ -83,14 +83,6 @@
 .step-copy {
   min-height: 190px;
   text-align: center;
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(8px);
-  pointer-events: none;
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s ease,
-    filter 0.45s ease;
 }
 
 .step-description {
@@ -118,13 +110,7 @@
   color: var(--pure);
 }
 
-.step-circle:hover + .step-copy,
-.step-circle:focus-visible + .step-copy,
-.step-item:hover .step-copy {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
+
 
 .step-item:hover .step-circle {
   background: var(--pure);
