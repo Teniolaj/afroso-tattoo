@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="footer-col address-col">
             <h4>Find Us</h4>
             <address>
-              Osu, Accra<br />
+              406 Eduardo Mohdlana Rd, Accra<br />
               Ghana<br /><br />
               +233 50 324 2339<br />
               bookings@afroso.tattoo
