@@ -2,8 +2,20 @@
   "buildCommand": "cd artifacts/afroso-tattoo && npx vite build --config vite.config.ts",
   "outputDirectory": "artifacts/afroso-tattoo/dist/public",
   "installCommand": "pnpm install --no-frozen-lockfile",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.afrosotattoo.com/$1",
+      "permanent": true
+    }
+  ],
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
